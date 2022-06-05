@@ -1,7 +1,7 @@
 import re
 from typing import NoReturn
 from django.db.models.query import EmptyQuerySet
-from django.http import request
+from django.http import request,HttpResponse
 from django.http.response import HttpResponseRedirect
 import mysql.connector
 from django.http import HttpResponse
@@ -16,3 +16,6 @@ def localStores(request):
 
 def productView(request):
     return render(request,'product-view.html')   
+
+def sign_in(request):
+    return render (request,'sign-in.html')

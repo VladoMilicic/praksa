@@ -175,7 +175,7 @@ ul{
     }
     .main-header{
         display: block;
-        height: 350px;
+        height: 450px;
         width: 100%;
         
     }
@@ -362,6 +362,7 @@ ul{
                 <b>AVENUE </b>&nbsp FASHION
 
             </div>
+            
             <div class="center-main-header">
                 
                 <ul>  
@@ -441,10 +442,10 @@ ul{
                     
                     
                     <div class="dropdown">
-                        <li><a href="{% url 'localStores' %}">LOCAL STORES
+                     <li><button class="dropbtn"><a href="{% url 'localStores' %}">LOCAL STORES</a>
                             
-                          <i class="fa fa-caret-down"></i>
-                        </a></li>
+                    <i class="fa fa-caret-down"></i>
+                  </button></li>
                         <div class="dropdown-content">
                             
                           <div class="row">

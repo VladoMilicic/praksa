@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'sign-in.css' %}">
+</head>
+<body>
+    {% block content %}
+    {% include 'header.html' %}
+    {% endblock %}
+    <div class="main">
+        
+        <div class="sign-in">
+            <h2>SING IN</h2>
+            
+            <input type="email" class="email" placeholder="Enter Email">
+            <input type="password" class="password" placeholder="Enter Password">
+            <div class="sign-in-button">
+                <button type="submit" class="sign-btn">SIGN IN</button>
+                <br>
+                <br>
+                <a href="#" class="link-btn">Forgot your password <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+        </div>
+        <hr>
+        <div class="register">
+            <h2>REGISTER</h2>
+            <input type="email" class="email" placeholder="Enter Email">
+            <input type="password" class="password" placeholder="Enter Password">
+            <input type="password" class="password" placeholder="Repeat Password">
+            <div class="check-div">
+                
+                <label class="checkbox">
+                    <input type="checkbox" class="checkbox">Sign up for exclusive updates,discounts,new arrivals,contests and more
+                </label>
+
+            </div>
+            
+            <div class="create">
+                <button class="create-btn">CREATE ACCOUNT</button>
+                <p>By clicking on 'CREATE ACCOUNT' you agree to our  <a href="#" class="link-btn">Privacy Policy  <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></p>
+                
+
+            </div>
+
+        </div>
+    </div>
+    <footer-component></footer-component>
+</body>

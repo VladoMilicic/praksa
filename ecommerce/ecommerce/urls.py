@@ -18,11 +18,15 @@ from os import name
 from django.contrib import admin
 from django.urls import path
 from . import views
+
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('',views.HomePage),
+    path('local-store',views.localStores,name='local-stores'),
+    path('sign-in',views.sign_in,name='sign-in'),
+    
     
 ]

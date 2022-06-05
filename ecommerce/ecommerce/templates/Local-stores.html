@@ -14,7 +14,9 @@
   </head>
 
   <body>
-    <header-component></header-component>
+    {% block content %}
+    {% include 'header.html' %}
+    {% endblock %}
     <section class = "local-stores">
         <div class = "find-us">
           <h3>FIND A STORE NEAR YOU</h3>
