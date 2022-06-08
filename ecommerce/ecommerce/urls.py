@@ -27,6 +27,7 @@ urlpatterns = [
     path('',views.HomePage),
     path('local-store',views.localStores,name='local-stores'),
     path('sign-in',views.sign_in,name='sign-in'),
+    path('lookbook',views.lookbook,name='lookbook'),
     
     
 ]

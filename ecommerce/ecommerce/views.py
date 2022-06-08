@@ -19,3 +19,6 @@ def productView(request):
 
 def sign_in(request):
     return render (request,'sign-in.html')
+
+def lookbook(request):
+    return render(request,'Lookbook.html')
