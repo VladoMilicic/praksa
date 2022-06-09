@@ -28,6 +28,7 @@ urlpatterns = [
     path('local-store',views.localStores,name='local-stores'),
     path('sign-in',views.sign_in,name='sign-in'),
     path('lookbook',views.lookbook,name='lookbook'),
+    path('product-view',views.productView,name='product-view'),
     
     
 ]

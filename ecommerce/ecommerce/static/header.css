@@ -13,7 +13,7 @@ body{
     background-color: #333333;
 }
 .left-upper-header{
-    width: 50%;
+    width: 30%;
     display:flex;
     justify-content:center ;
     align-items: center;
@@ -32,7 +32,7 @@ body{
     
 }
 .center-upper-header{
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content:center;
     align-items: center;
@@ -151,7 +151,7 @@ ul{
 
 }
 .searchbutton{
-    margin-top: 22px;
+    
     width: 30px;
     height: 40px;
 }
@@ -179,10 +179,11 @@ ul{
     }
     .header{
         display: block;
+        height: 100%;
     }
     .upper-header{
         display: block;
-        height: 150px;
+        height: 250px;
         width: 100%;
         
     }
@@ -210,7 +211,7 @@ ul{
     }
     .main-header{
         display: block;
-        height: 350px;
+        height: 550px;
         width: 100%;
         
     }

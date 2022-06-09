@@ -20,7 +20,9 @@
     <title>Product view</title>
   </head>
   <body>
-    <header-component></header-component>
+    {% block content %}
+    {% include 'header.html' %}
+    {% endblock %}
     <div class="header-section">
       <div class="page-title">
         <p>
