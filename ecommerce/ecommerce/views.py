@@ -6,6 +6,7 @@ from django.http.response import HttpResponseRedirect
 import mysql.connector
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from .models import Product
 
 
 def HomePage(request):
@@ -22,3 +23,7 @@ def sign_in(request):
 
 def lookbook(request):
     return render(request,'Lookbook.html')
+
+def mens(request):
+    ctx=Product.objects.all()
+    return render(request,'mens.html',{'products':ctx})

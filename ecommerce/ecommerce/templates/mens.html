@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/mens.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    {% load static %}
+    <script src="{% static 'header-footer.js' %}"></script>
+    <title>lookbook</title>
+  </head>
+  <body>
+    {% block content %}
+    {% include 'header.html' %}
+    {% endblock %}
+    <div class="container">
+        <div class="product-row">
+            {%for product in products%}
+            <div class="product-card">
+                
+                <img  class="product-img" src="{{product.Product_Image}}">
+                <p class="product-title">{{product.Product_Title}}</p>
+                <p class="product-price">{{product.Product_Price}}$</p>
+                <button class="product-view-button">
+                    VIEW PRODUCT
+                </button>
+                
+                
+
+            </div>
+            {%endfor%}
+        
+
+        </div>
+
+        
+    </div>
+    <footer-component></footer-component>
+  </body>
+</html>

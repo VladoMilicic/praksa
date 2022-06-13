@@ -20,17 +20,13 @@ ul {
   background-size: cover;
   position: relative;
 }
-* {
-  padding: 0px;
-  margin: 0px;
-}
+
+
 body{
   display: block;
 }
 
-.lookbook-body {
-  width: 100%;
-}
+
 @media only screen and (max-width: 768px) {
   
   .header-section {
@@ -94,11 +90,7 @@ body{
   }
 }
 
-.row {
-  display: flex;
-  padding-top: 3%;
-  padding-left: 19%;
-}
+
 
 @media screen and (max-width: 768px) {
   .row {
