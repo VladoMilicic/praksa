@@ -57,6 +57,7 @@ def signIn(request):  # rename to register
         email = request.POST['email']
         password = request.POST['password']
         res=NewUser.objects.filter(email=email,password=password).count()
+        
         if (res!=0):
             
             # Redirect to a success page.

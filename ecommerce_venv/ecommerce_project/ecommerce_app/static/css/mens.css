@@ -9,15 +9,16 @@
     border-style: solid;
     border-radius: 5px;
     width: 24%;
-    height: 600px;
+    height: 640px;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
 }
 .product-img{
-    height: 400px;
-    width: 300px;
-    margin-left: 20px;
+    height: 350px;
+    width: 280px;
+    margin-left: 40px;
+    margin-top: 10px;
     
 }
 .product-title{
@@ -36,10 +37,36 @@
     height: 50px;
     width: 100px;
     text-align: center;
-    justify-content: center;
+    
     font-family: 'Monsterrat';
-    margin-left: 135px;
+    
     background-color: black;
     color: aliceblue;
     letter-spacing: 1px;
+}
+.product-view-button:hover{
+    background-color: aqua;
+}
+.add-to-cart-button{
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    
+    font-family: 'Monsterrat';
+    
+    
+    background-color: black;
+    color: aliceblue;
+    letter-spacing: 1px;
+}
+.add-to-cart-button:hover{
+    background-color: white;
+    color: black;
+
+}
+.product-cart-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 55px;
+    margin-right: 55px;
 }
