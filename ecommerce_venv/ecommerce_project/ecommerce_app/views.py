@@ -56,9 +56,9 @@ def signIn(request):  # rename to register
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
+        res=NewUser.objects.filter(email=email,password=password).count()
+        if (res!=0):
+            
             # Redirect to a success page.
             return HttpResponse("Proradio materi")
         else:

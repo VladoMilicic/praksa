@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/mens.css" />
+    <link rel="stylesheet" href="{% static 'css/mens.css' %}" />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
@@ -26,7 +26,7 @@
             {%for product in products%}
             <div class="product-card">
                 
-                <img  class="product-img" src="{{product.Product_Image}}">
+                <img  class="product-img" src="../static/media/{{product.Product_Image}}">
                 <p class="product-title">{{product.Product_Title}}</p>
                 <p class="product-price">{{product.Product_Price}}$</p>
                 <button class="product-view-button">
