@@ -45,7 +45,7 @@ class Product(models.Model):
         ('on_count', 'On count'),
         ('off_count', 'Off count'),
     )
-    SEX_CHOICE = (
+    GENDER_CHOICE = (
         ('male', 'Male'),
         ('female', 'Female'),
     )
@@ -67,7 +67,7 @@ class Product(models.Model):
 
     product_title = models.CharField(max_length=100, db_index=True)
     product_description = models.TextField(blank=True)
-    sex = models.CharField(max_length=6, choices=SEX_CHOICE, null=True)
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICE, null=True)
     product_price = models.DecimalField(max_digits=10, decimal_places=2)
     product_image = models.ImageField(
         upload_to="products/", blank=True)
@@ -98,7 +98,7 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
-    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+    photo = models.ImageField(upload_to='users/', blank=True)
 
     class Meta:
         db_table = "ecommerce_profile"
