@@ -1,19 +1,23 @@
 
 # Create your views here.
+from cgitb import html
+from itertools import count
 import re
 from typing import NoReturn
+from xml.dom import NotFoundErr
 from django.db.models.query import EmptyQuerySet
-from django.http import request, HttpResponse
+from django.http import Http404, request, HttpResponse
 from django.http.response import HttpResponseRedirect
 import mysql.connector
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+import pkg_resources
 from .models import Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile, NewUser
+from .models import Profile, NewUser, Category, Product
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 
@@ -26,6 +30,10 @@ def homePage(request):
 
 
 def header(request):
+    if signIn(request) == True:
+        return request('homepage')
+    else:
+        return HttpResponse("You must be loged in")
     return render(request, 'header.html')
 
 
@@ -38,7 +46,19 @@ def localStores(request):
 
 
 def productView(request):
-    return render(request, 'product-view.html')
+    slug = None
+    if request.method == 'GET':
+        slug = Product.objects.filter(slug="dzempr")
+        if slug is not None:
+            product = Product.objects.filter(slug="dzemper").get()
+            return redirect('product-view/<slug:product>')
+        else:
+            return html("<h>product not found!</h>")
+    return render(request, 'product-view.hvaljatml/<slug:slug>/', {'product': product})
+
+
+def get_apsolute_url(self):  # absolute url for slugfield//testirati da li
+    return f'/products/{self.slug}/'
 
 
 def lookbook(request):
@@ -56,12 +76,12 @@ def signIn(request):  # rename to register
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        res=NewUser.objects.filter(email=email,password=password).count()
-        
-        if (res!=0):
-            
+        res = NewUser.objects.filter(email=email, password=password).count()
+
+        if (res != 0):
+
             # Redirect to a success page.
-            return HttpResponse("Proradio materi")
+            return HttpResponseRedirect('product-view')
         else:
             # Return an 'invalid login' error message.
             return HttpResponse("Ne radi")
@@ -129,6 +149,10 @@ def edit(request):
                    'profile_form': profile_form})
 
 
-def mens(request):
-    ctx = Product.objects.all()
-    return render(request, 'mens.html', {'products': ctx})
+def mens(request, category_slug=None):
+    category = None
+    male_products = Product.objects.all().filter(sex='male')
+    available = Product.objects.filter(status='on_count')
+    if category_slug and available:
+        category = get_object_or_404(Category, slug=category_slug)
+    return render(request, 'mens.html', {'male_products': male_products})

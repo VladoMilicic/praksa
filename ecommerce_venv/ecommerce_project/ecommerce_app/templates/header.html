@@ -22,10 +22,18 @@
           <option>BAM</option>
         </select>
       </div>
+      {% if user is None %}
       <div class="center-upper-header">
         <a href="{% url 'sign-in' %}" class="register-link">Register</a>&nbsp&nbsp&nbsp
         <a class="sign-in-link" href="{% url 'sign-in' %}">Sing in</a>
       </div>
+      {% endif %}
+      {% if user == user %}
+      <div class="center-upper-header">
+        <a href="{% url 'sign-in' %}" class="register-link">Register</a>&nbsp&nbsp&nbsp
+        <a class="sign-in-link" href="{% url 'sign-in' %}">Sing in</a>
+      </div>
+      {% endif %}
       <div class="right-upper-header">
         <span class="cart">
           <h3 class="empty">Empty</h3>

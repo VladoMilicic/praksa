@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./static/product-view.css" />
+    <link rel="stylesheet" href="{% static 'css/product-view.css' %}" />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat"
       rel="stylesheet"
@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link
       rel="stylesheet"
-      href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css %}"
+      href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}"
     />
   <script src="{% static 'js/header-footer.js' %}"></script>
     <title>Product view</title>
@@ -46,22 +46,20 @@
               <img
               
                 class="product-slide-img"
-                src="{% static 'img/products/product1.jpg' %}"
+                src="{{product.product_image}}"
                 
               />
             </div>
-
             <div class="mySlides fade">
               <img
                 class="product-slide-img"
-                src="{% static 'img/products/product1.jpg' %}"
+                src="{{product.product_image}}"
               />
             </div>
-
             <div class="mySlides fade">
               <img
                 class="product-slide-img"
-                src="{% static 'img/products/product1.jpg' %}"
+                src="{{product.product_image}}"
               />
             </div>
 

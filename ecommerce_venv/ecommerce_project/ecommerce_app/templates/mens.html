@@ -23,35 +23,22 @@
     {% endblock %}
     <div class="container">
         <div class="product-row">
-            {%for product in products%}
+            {% for product in male_products %}
             <div class="product-card">
-                
-                <img  class="product-img" src="../static/media/{{product.Product_Image}}">
-                <p class="product-title">{{product.Product_Title}}</p>
-                <p class="product-price">{{product.Product_Price}}$</p>
+                <img  class="product-img" src="{{product.product_image}}">
+                <p class="product-title">{{product.product_title}}</p>
+                <p class="product-price">{{product.product_price}}$</p>
                 <div class="product-cart-buttons">
-                  <button class="product-view-button">
-                
-                    VIEW PRODUCT
-                </button>
+                  <a href="{% url 'product-view' %}"><button class="product-view-button">  
+                   VIEW PRODUCT
+                </button></a>
                 <button class="add-to-cart-button" action="submit">ADD TO 
                   <i style="font-size:26px" class="fa">&#xf07a;</i>
                 </button>
-
                 </div>
-              
-
-
-                
-                
-
             </div>
-            {%endfor%}
-        
-
+            {% endfor %}
         </div>
-
-        
     </div>
     <footer-component></footer-component>
   </body>

@@ -1,11 +1,12 @@
-.product-row{
+.product-row {
     display: flex;
     flex-flow: row wrap;
     margin-top: 5px;
 }
-.product-card{
+
+.product-card {
     border: 1px;
-    border-color: aqua ;
+    border-color: aqua;
     border-style: solid;
     border-radius: 5px;
     width: 24%;
@@ -14,57 +15,65 @@
     margin-right: 5px;
     margin-top: 5px;
 }
-.product-img{
+
+.product-img {
     height: 350px;
     width: 280px;
     margin-left: 40px;
     margin-top: 10px;
-    
+
 }
-.product-title{
+
+.product-title {
     font-family: 'Montserrat';
     color: rgb(93, 93, 93);
     font-size: 20px;
     text-align: center;
 }
-.product-price{
+
+.product-price {
     font-family: 'Montserrat';
     color: rgb(94, 94, 94);
     font-size: 20px;
     text-align: center;
 }
-.product-view-button{
+
+.product-view-button {
     height: 50px;
     width: 100px;
     text-align: center;
-    
+
     font-family: 'Monsterrat';
-    
+
     background-color: black;
     color: aliceblue;
     letter-spacing: 1px;
 }
-.product-view-button:hover{
+
+.product-view-button:hover {
     background-color: aqua;
 }
-.add-to-cart-button{
+
+.add-to-cart-button {
     height: 50px;
     width: 100px;
     text-align: center;
-    
+
     font-family: 'Monsterrat';
-    
-    
+
+
     background-color: black;
     color: aliceblue;
     letter-spacing: 1px;
 }
-.add-to-cart-button:hover{
+
+.add-to-cart-button:hover {
     background-color: white;
     color: black;
 
 }
-.product-cart-buttons{
+
+.product-cart-buttons {
     display: flex;
     justify-content: space-between;
     margin-left: 55px;
