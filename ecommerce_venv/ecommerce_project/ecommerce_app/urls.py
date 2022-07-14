@@ -1,3 +1,4 @@
+from unicodedata import name
 from django import views
 from django.urls import path, include
 from django.conf import settings
@@ -16,5 +17,8 @@ urlpatterns = [
     path('mens', views.mens, name="mens"),
     path('header', views.header, name="header"),
     path('footer', views.footer, name="footer"),
+    path('cart',views.cart,name='cart'),
+    path('add_to_cart',views.add_to_cart,name='add_to_cart'),
+    path('make_order',views.make_order,name='make_order'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

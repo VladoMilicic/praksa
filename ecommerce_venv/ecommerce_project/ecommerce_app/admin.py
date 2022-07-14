@@ -1,25 +1,16 @@
-from atexit import register
 from django.contrib import admin
-from .models import NewUser, Product, Profile, Category
+from .models import NewUser, Product, Profile
 # Register your models here.
 admin.site.register(NewUser)
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('status', 'gender', 'product_title',
-                    'product_price', 'size', 'color', 'product_image', 'created', 'updated', 'slug')
-    list_display_links = ['color', ]
-    list_filter = ('gender', 'status', 'product_title', 'product_price')
-    list_editable = ['gender', 'product_price', 'status', 'size']
-    search_fields = ('product_title', 'product_price')
-    prepopulated_fields = {'slug': ('product_title', )}
-
-
-@admin.register(Category)
-class Category(admin.ModelAdmin):
-    list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('Status', 'Product_Title',
+                    'Product_Price', 'Product_Image', 'Slug')
+    list_filter = ('Status', 'Product_Title', 'Product_Price')
+    search_fields = ('Product_Title', 'Product_Price')
+    prepopulated_fields = {'Slug': ('Product_Title', )}
 
 
 @admin.register(Profile)

@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -137,7 +137,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = '/static/'
 
 # Base url to serve media files
-MEDIA_URL = '//'
+MEDIA_URL = ''
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ecommerce_app/static/media/')

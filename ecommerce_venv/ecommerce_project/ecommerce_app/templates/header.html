@@ -15,28 +15,21 @@
   <div class="header">
     <div class="upper-header">
       <div class="left-upper-header">
-        <select name="pay-currency" id="pay-currency" required>
+        <select onclick="return myFunction()" name="pay-currency" id="pay-currency" required>
           <option disabled="true">Currency</option>
-          <option>GBP</option>
           <option>USD</option>
+          <option>GBP</option>
+          
           <option>BAM</option>
         </select>
       </div>
-      {% if user is None %}
       <div class="center-upper-header">
         <a href="{% url 'sign-in' %}" class="register-link">Register</a>&nbsp&nbsp&nbsp
         <a class="sign-in-link" href="{% url 'sign-in' %}">Sing in</a>
       </div>
-      {% endif %}
-      {% if user == user %}
-      <div class="center-upper-header">
-        <a href="{% url 'sign-in' %}" class="register-link">Register</a>&nbsp&nbsp&nbsp
-        <a class="sign-in-link" href="{% url 'sign-in' %}">Sing in</a>
-      </div>
-      {% endif %}
       <div class="right-upper-header">
         <span class="cart">
-          <h3 class="empty">Empty</h3>
+          <a href="{% url 'cart' %}" class="empty">Empty</a>
           &nbsp&nbsp&nbsp
           <i style="font-size:26px" class="fa">&#xf07a;</i>
         </span>
@@ -44,7 +37,7 @@
     </div>
     <div class="main-header">
       <div class="left-main-header">
-        <a href="{% url 'homepage' %}"><b>AVENUE </b>&nbsp FASHION<a>
+        <a href="{% url 'base' %}" class="home_link"><b>AVENUE </b>&nbsp FASHION<a>
       </div>
       <div class="center-main-header">
         <ul>

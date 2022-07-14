@@ -1,24 +1,37 @@
 
 # Create your views here.
-from cgitb import html
-from itertools import count
+from locale import currency
+from operator import countOf
 import re
 from typing import NoReturn
-from xml.dom import NotFoundErr
 from django.db.models.query import EmptyQuerySet
-from django.http import Http404, request, HttpResponse
+from django.http import request, HttpResponse
 from django.http.response import HttpResponseRedirect
 import mysql.connector
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
-import pkg_resources
+from django.shortcuts import render
 from .models import Product
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile, NewUser, Category, Product
+from .models import Profile, NewUser,Product
+from ecommerce_app.models import Cart,All_Orders
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+import mysql.connector
+mydb=mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="1234",
+    database="ecommerce"
+    
+
+)
+
+
+
+
+mycursor=mydb.cursor()
 
 
 def base(request):
@@ -30,10 +43,6 @@ def homePage(request):
 
 
 def header(request):
-    if signIn(request) == True:
-        return request('homepage')
-    else:
-        return HttpResponse("You must be loged in")
     return render(request, 'header.html')
 
 
@@ -46,19 +55,7 @@ def localStores(request):
 
 
 def productView(request):
-    slug = None
-    if request.method == 'GET':
-        slug = Product.objects.filter(slug="dzempr")
-        if slug is not None:
-            product = Product.objects.filter(slug="dzemper").get()
-            return redirect('product-view/<slug:product>')
-        else:
-            return html("<h>product not found!</h>")
-    return render(request, 'product-view.hvaljatml/<slug:slug>/', {'product': product})
-
-
-def get_apsolute_url(self):  # absolute url for slugfield//testirati da li
-    return f'/products/{self.slug}/'
+    return render(request, 'product-view.html')
 
 
 def lookbook(request):
@@ -76,12 +73,12 @@ def signIn(request):  # rename to register
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        res = NewUser.objects.filter(email=email, password=password).count()
-
-        if (res != 0):
-
+        res=NewUser.objects.filter(email=email,password=password).count()
+        
+        if (res!=0):
+            
             # Redirect to a success page.
-            return HttpResponseRedirect('product-view')
+            return HttpResponse("Proradio materi")
         else:
             # Return an 'invalid login' error message.
             return HttpResponse("Ne radi")
@@ -149,10 +146,51 @@ def edit(request):
                    'profile_form': profile_form})
 
 
-def mens(request, category_slug=None):
-    category = None
-    male_products = Product.objects.all().filter(sex='male')
-    available = Product.objects.filter(status='on_count')
-    if category_slug and available:
-        category = get_object_or_404(Category, slug=category_slug)
-    return render(request, 'mens.html', {'male_products': male_products})
+                
+    
+def mens(request):
+    on_count = Product.objects.filter(Status="on_count")
+    off_count = Product.objects.filter(Status="off_count")
+    
+    return render(request, 'mens.html', {'on_count': on_count,'off_count': off_count,})
+
+
+
+
+
+def cart(request):
+    product=Cart.objects.all()
+    return render(request,'cart.html',{'cart':product})
+
+num=[]
+def add_to_cart(request):
+    if request.method=="POST":
+        id=request.POST['id']
+        
+    
+        
+        mydata = Product.objects.filter(id=id).values()
+        
+        values_by_id= {
+            'mymembers': mydata,
+        }
+        b=values_by_id['mymembers'][0]
+    
+        
+        Order_Number=1
+        num.append(Order_Number)
+        i=len(num)
+        N_Order_Number= i + 1
+        Cart(Order_Number=Order_Number,Order_Product=b['Product_Title'],Order_Product_Price=b['Product_Price'],Order_Product_Value="$",Order_Product_Image=b['Product_Image']).save()
+        All_Orders(Order_Number=N_Order_Number,Order_Product=b['Product_Title'],Order_Product_Price=b['Product_Price'],Order_Product_Value="$",Order_Product_Image=b['Product_Image']).save()
+        
+        return render(request,'mens.html')
+
+
+
+def make_order(request):
+    Cart.objects.all().delete()
+    if request.method=="POST":
+        price=request.POST['total_value']
+        return render(request,'payment.html',{"price" : price})        
+        

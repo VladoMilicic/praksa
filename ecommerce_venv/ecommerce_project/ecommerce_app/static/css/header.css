@@ -91,6 +91,20 @@ select {
     justify-content: center;
     align-items: center;
 }
+.empty{
+    font-family: 'montserrat';
+    color: aliceblue;
+    font-size: 15px;
+    margin-top: 5px;
+}
+.empty:active{
+    color: #333333;
+    text-decoration: none;
+}
+.empty:visited{
+    text-decoration: none;
+    ;
+}
 
 .main-header {
     display: flex;
@@ -165,6 +179,16 @@ ul {
 
 .empty {
     color: white;
+    text-decoration: none;
+}
+.home_link{
+    text-decoration: none;
+}
+.home_link:active{
+    color: #333333;
+}
+.home_link:visited{
+    color: #333333;
 }
 
 @media (max-width:768px) {
