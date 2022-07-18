@@ -31,21 +31,21 @@
             
             {%for product in on_count %}
             
-             <form method="POST" action="{% url 'add_to_cart' %}" class="cart-form">
+             <form method="POST" action="{% url 'add_to_cart' %}"  class="cart-form">
               {% csrf_token %}
             
               
               <div  class="product-card">
                 <input id="id" type="number"  name="id" value="{{product.id}}"><br>
                   
-                  <img  class="product-img" name="product-img" src="../static/media/{{product.Product_Image}}">
-                  <p class="product-title" name="product-title" >{{product.Product_Title}}</p>
+                  <img  class="product-img" name="product-img" src="../static/media/{{product.product_image}}">
+                  <p class="product-title" name="product-title" >{{product.product_title}}</p>
                   <div class="price">
-                    <p class="product-price" name="product-price" >{{product.Product_Price}}</p>&nbsp;
+                    <p class="product-price" name="product-price" >{{product.product_price}}</p>&nbsp;
                     <p class="product-value" name="product-value">$</p>
                   </div>
                   <div class="product-cart-buttons">
-                    <button class="product-view-button">
+                    <a class="product-view-button" href="{% url 'product-view' %}"></a>
                   
                       VIEW PRODUCT
                   </button>
@@ -215,6 +215,7 @@
       }
       
     }
+    
     
   </script>
     

@@ -13,6 +13,7 @@
 
 <body>
   <div class="header">
+    
     <div class="upper-header">
       <div class="left-upper-header">
         <select onclick="return myFunction()" name="pay-currency" id="pay-currency" required>
@@ -29,7 +30,8 @@
       </div>
       <div class="right-upper-header">
         <span class="cart">
-          <a href="{% url 'cart' %}" class="empty">Empty</a>
+          <a href="{% url 'cart' %}" id="empty" class="empty">{{number_of_products}}</a>
+          
           &nbsp&nbsp&nbsp
           <i style="font-size:26px" class="fa">&#xf07a;</i>
         </span>

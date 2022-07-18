@@ -20,5 +20,6 @@ urlpatterns = [
     path('cart',views.cart,name='cart'),
     path('add_to_cart',views.add_to_cart,name='add_to_cart'),
     path('make_order',views.make_order,name='make_order'),
+    path('finish_order',views.finish_order,name='finish_order')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
