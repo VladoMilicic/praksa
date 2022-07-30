@@ -15,31 +15,29 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile, NewUser,Product
-from ecommerce_app.models import Cart,All_Orders,Order_Values
+from .models import Profile, NewUser, Product
+from ecommerce_app.models import Cart, AllOrders, OrderValues
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 import mysql.connector
-from datetime import date,datetime,timedelta
+from datetime import date, datetime, timedelta
 
-today=date.today()
+today = date.today()
 now = datetime.now()
-mydb=mysql.connector.connect(
+mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="1234",
+    password="root",
     database="ecommerce"
-    
+
 
 )
 
 
-
-
-mycursor=mydb.cursor()
+mycursor = mydb.cursor()
 
 
 def base(request):
-   
+
     return render(request, 'base.html')
 
 
@@ -48,7 +46,7 @@ def homePage(request):
 
 
 def header(request):
-   
+
     return render(request, 'header.html')
 
 
@@ -79,10 +77,10 @@ def signIn(request):  # rename to register
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
-        res=NewUser.objects.filter(email=email,password=password).count()
-        
-        if (res!=0):
-            
+        res = NewUser.objects.filter(email=email, password=password).count()
+
+        if (res != 0):
+
             # Redirect to a success page.
             return HttpResponse("Proradio materi")
         else:
@@ -152,90 +150,81 @@ def edit(request):
                    'profile_form': profile_form})
 
 
-                
-    
 def mens(request):
     on_count = Product.objects.filter(status="on_count")
     off_count = Product.objects.filter(status="off_count")
-    
-    return render(request, 'mens.html', {'on_count': on_count,'off_count': off_count,})
 
-
-
+    return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, })
 
 
 def cart(request):
-    product=Cart.objects.all()
-    return render(request,'cart.html',{'cart':product})
+    product = Cart.objects.all()
+    return render(request, 'cart.html', {'cart': product})
 
-num=[]
+
+num = []
+
+
 def add_to_cart(request):
-    if request.method=="POST":
-        id=request.POST['id']
-        
-    
-        
+    if request.method == "POST":
+        id = request.POST['id']
+
         mydata = Product.objects.filter(id=id).values()
-        
-        values_by_id= {
+
+        values_by_id = {
             'mymembers': mydata,
         }
-        b=values_by_id['mymembers'][0]
-    
-        
-        Order_Number=1
-        num.append(Order_Number)
-        i=len(num)
-        N_Order_Number= i + 1
-        Cart(Order_Number=Order_Number,Order_Product=b['product_title'],Order_Product_Price=b['product_price'],Order_Product_Value="$",Order_Product_Image=b['product_image']).save()
-        All_Orders(Order_Number=N_Order_Number,Order_Product_id=b['id'],Order_Product=b['product_title'],Order_Product_Price=b['product_price'],Order_Product_Value="$",Order_Product_Image=b['product_image']).save()
-        
+        b = values_by_id['mymembers'][0]
+
+        order_number = 1
+        num.append(order_number)
+        i = len(num)
+        n_order_number = i + 1
+        Cart(order_number=order_number, order_product=b['product_title'], order_product_price=b[
+             'product_price'], order_product_Value="$", order_product_image=b['product_image']).save()
+        AllOrders(order_number=n_order_number, order_product_id=b['id'], order_product=b['product_title'],
+                  order_product_price=b['product_price'], order_product_Value="$", order_product_image=b['product_image']).save()
+
         on_count = Product.objects.filter(status="on_count")
         off_count = Product.objects.filter(status="off_count")
-        number_of_items=Cart.objects.all().count()
-        
-        return render(request, 'mens.html', {'on_count': on_count,'off_count': off_count,"number_of_items":number_of_items})
+        number_of_items = Cart.objects.all().count()
 
+        return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, "number_of_items": number_of_items})
 
 
 def make_order(request):
     Cart.objects.all().delete()
-    if request.method=="POST":
-        price=request.POST['total_value']
-        return render(request,'payment.html',{"price" : price})        
-        
+    if request.method == "POST":
+        price = request.POST['total_value']
+        return render(request, 'payment.html', {"price": price})
 
 
 def finish_order(request):
-    if request.method=="POST":
-        Card_Number=request.POST['card']
-        Name=request.POST['name']
-        Expiration_Date=request.POST['expiration']
-        Security_Code=request.POST['security']
-        Price=request.POST['price']
-        Date =today.strftime("%m/%d/%y")
-        Time=now.strftime("%H:%M:%S")
-        sql="select *from ecommerce_all_orders ORDER BY id DESC LIMIT 1;"
+    if request.method == "POST":
+        card_number = request.POST['card']
+        name = request.POST['name']
+        expiration_date = request.POST['expiration']
+        security_code = request.POST['security']
+        price = request.POST['price']
+        date = today.strftime("%m/%d/%y")
+        time = now.strftime("%H:%M:%S")
+        sql = "select * from ecommerce_all_orders ORDER BY id DESC LIMIT 1;"
 
         mycursor.execute(sql)
-        a=mycursor.fetchall()
-        Order_Number=a[0][1]
-        products=[]
-        mydata = All_Orders.objects.filter(Order_Number=Order_Number).values()
-        
-        values_by_id= {
+        a = mycursor.fetchall()
+        order_number = a[0][1]
+        products = []
+        mydata = AllOrders.objects.filter(order_number=order_number).values()
+
+        values_by_id = {
             'mymembers': mydata,
         }
-        b=values_by_id['mymembers']
+        b = values_by_id['mymembers']
         for i in b:
-            products.append(i['Order_Product_id'])
-        products1=';'.join(products)
-        
-        Order_Values(Order_Number=Order_Number,Price=Price,Name=Name,Card_Number=Card_Number,Expiration_Date=Expiration_Date,Security_Code=Security_Code,Date=Date,Time=Time,Products=products1).save()
+            products.append(i['order_product_id'])
+        products1 = ';'.join(products)
 
-        return render(request,'payment.html',{"products":products1})
+        OrderValues(order_number=order_number, Price=price, Name=name, card_number=card_number,
+                    expiration_date=expiration_date, security_code=security_code, date=date, time=time, Products=products1).save()
 
-
-
-
-
+        return render(request, 'payment.html', {"products": products1})
