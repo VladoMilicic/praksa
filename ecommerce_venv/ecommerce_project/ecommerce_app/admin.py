@@ -1,6 +1,6 @@
 from atexit import register
 from django.contrib import admin
-from .models import NewUser, Product, Profile, Category, TShirt, Jeans,Color, ProductSize
+from .models import NewUser, Product, Profile, Category, TShirt, Jeans, Color, ProductSize
 
 # Register your models here.
 admin.site.register(NewUser)
@@ -12,14 +12,14 @@ admin.site.register(ProductSize)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('status', 'gender', 'product_title', 'number_of_products',
+    list_display = ('status', 'gender', 'product_title',
                     'product_price', 'size', 'color', 'product_image', 'slug')
     list_display_links = ['color', ]
     list_filter = ('gender', 'status', 'product_title', 'product_price')
-    list_editable = ['gender', 'number_of_products',
+    list_editable = ['gender',
                      'product_price', 'status', 'size']
     search_fields = ('product_title', 'product_price')
-    prepopulated_fields = {'slug': ('product_title', )}
+    prepopulated_fields = {'slug': ('short_product_description', )}
 
 
 @admin.register(Category)

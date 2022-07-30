@@ -29,13 +29,24 @@ class NewUser(models.Model):
         return self.email
 
 
-class ProductColour(models.Model):
-    red = models.CharField(max_length=3, default="Red")
-    blue = models.CharField(max_length=4, default="Blue")
-    green = models.CharField(max_length=5, default="Green")
-    black = models.CharField(max_length=5, default="Black")
-    orange = models.CharField(max_length=6, default="Orange")
-    yellow = models.CharField(max_length=6, default="Yellow")
+class Color(models.Model):
+    red = models.PositiveIntegerField()
+    blue = models.PositiveIntegerField()
+    green = models.PositiveIntegerField()
+    black = models.PositiveIntegerField()
+    orange = models.PositiveIntegerField()
+    yellow = models.PositiveIntegerField()
+    white = models.PositiveIntegerField()
+
+
+class ProductColor(models.Model):
+    red = models.CharField(max_length=3)
+    blue = models.CharField(max_length=4)
+    green = models.CharField(max_length=5)
+    black = models.CharField(max_length=5)
+    orange = models.CharField(max_length=6)
+    yellow = models.CharField(max_length=6)
+    white = models.CharField(max_length=5)
 
     class Meta:
         verbose_name = "Colour"
@@ -51,9 +62,13 @@ GENDER_CHOICE = (
     ('female', 'Female'),
 )
 COLOR_CHOICES = (
-    ('blue', 'Blue'),
     ('red', 'Red'),
+    ('blue', 'Blue'),
+    ('green', 'Green'),
+    ('black', 'Black'),
     ('orange', 'Orange'),
+    ('yellow', 'Yellow'),
+    ('white', 'White'),
 )
 
 UPPER_BODY_SIZE_CHOICES = (
@@ -126,31 +141,28 @@ class ProductSize(models.Model):
     xxl = models.PositiveIntegerField()
 
 
-class Color(models.Model):
-    red = models.PositiveIntegerField()
-    green = models.PositiveIntegerField()
-    orange = models.PositiveIntegerField()
-
-
 class TShirt(models.Model):
     manufacturer = models.CharField(max_length=30, default=None)
     model = models.CharField(max_length=30, default=None)
-    size = models.CharField(
-        max_length=3, choices=UPPER_BODY_SIZE_CHOICES, null=True, blank=True)
-    NO_of_availabile_products = models.ForeignKey(
-        ProductSize, on_delete=models.CASCADE)
     NO_of_availabile_colors = models.ForeignKey(
         Color, on_delete=models.CASCADE)
+    NO_of_availabile_sizes = models.ForeignKey(
+        ProductSize, on_delete=models.CASCADE)
 
 
 class Jeans(models.Model):
     manufacturer = models.CharField(max_length=30, default=None)
     model = models.CharField(max_length=30, default=None)
-    color = models.CharField(max_length=15, choices=COLOR_CHOICES)
+    color = models.CharField(
+        max_length=15, choices=COLOR_CHOICES, blank=True, null=True)
     width = models.CharField(
         max_length=15, choices=LOWER_BODY_SIZE_WIDTH_CHOICES)
     height = models.CharField(
         max_length=15, choices=LOWER_BODY_SIZE_HEIGHT_CHOICES)
+    NO_of_availabile_products = models.ForeignKey(
+        ProductSize, on_delete=models.CASCADE)
+    NO_of_availabile_colors = models.ForeignKey(
+        Color, on_delete=models.CASCADE)
 
 
 class Category(models.Model):
@@ -169,20 +181,22 @@ class Category(models.Model):
 class Product(models.Model):
     product_title = models.CharField(
         max_length=100, db_index=True, null=False, blank=False)
-    number_of_products = models.PositiveIntegerField(null=False, blank=False)
-    product_description = models.TextField(blank=True)
+    short_product_description = models.CharField(max_length=150)
+    long_product_description = models.TextField(blank=True)
     gender = models.CharField(
         max_length=6, choices=GENDER_CHOICE, null=True)
     product_price = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=True)
+    discount_price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
     product_image = models.ImageField(
         upload_to="products/", null=True, blank=True)
-    # models.CharField(max_length=10, choices=COLOR_CHOICES, default="red")
-    color = models.OneToOneField(ProductColour, on_delete=models.CASCADE)
-    # models.CharField(max_length=6, choices=SIZE_CHOICES, null=False, blank=False)
-    size = models.OneToOneField(ProductSize, on_delete=models.CASCADE)
+    color = models.CharField(max_length=10, choices=COLOR_CHOICES)
+    size = models.ForeignKey(ProductSize, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default='off_count')
+    product_created = models.DateTimeField(auto_now_add=True)
+    product_updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(
         max_length=250, null=False, unique=True, db_index=True, blank=False)
 
