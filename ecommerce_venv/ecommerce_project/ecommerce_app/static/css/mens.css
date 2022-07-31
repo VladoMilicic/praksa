@@ -9,6 +9,7 @@
     border-color: aqua ;
     border-style: solid;
     border-radius: 5px;
+    width: 320px;
     
     height: 600px;
     margin-left: 5px;
@@ -21,8 +22,8 @@
 .product-img{
     height: 350px;
     width: 280px;
-    margin-left: 40px;
-    margin-top: 10px;
+    margin-left: 20px;
+    
     
 }
 .product-title{

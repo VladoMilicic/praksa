@@ -317,7 +317,9 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 1px solid grey;
   padding: 7px;
 }
-
+#color{
+  background-color: rgb(255, 255, 255);
+}
 .compare-link {
   padding-left: 50px;
   letter-spacing: 2px;
@@ -657,4 +659,22 @@ img {
     height: 60px;
     color: #9a9a9a;
   }
+}
+
+
+#pxxs{
+  display: none;
+}
+
+#pm{
+  display: none;
+}
+#pl{
+  display: none;
+}
+#pxl{
+  display: none;
+}
+#pxxl{
+  display: none;
 }

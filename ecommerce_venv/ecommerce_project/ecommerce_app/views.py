@@ -15,7 +15,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile, NewUser, Product
+from .models import Profile, NewUser, Product,ProductSize
 from ecommerce_app.models import Cart, AllOrders, OrderValues
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 import mysql.connector
@@ -26,7 +26,7 @@ now = datetime.now()
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="root",
+    password="1234",
     database="ecommerce"
 
 
@@ -59,7 +59,12 @@ def localStores(request):
 
 
 def productView(request):
-    return render(request, 'product-view.html')
+    if request.method=="POST":
+        id=request.POST['id']
+        product=Product.objects.filter(id=id)
+        size=ProductSize.objects.filter(id=id)
+
+        return render(request, 'product-view.html',{"product":product,"size":size})
 
 
 def lookbook(request):
