@@ -25,13 +25,116 @@
     <div class="conatiner">
       {% for product in cart %}
       <div class="product-card">
-        <img class="product-image" src="../static/media/{{product.Order_Product_Image}}">
-        <p class="Product_Title">{{product.Order_Product}}</p>
-        <p class="Product_Price">{{product.Order_Product_Price}}</p>
+        <img class="product-image" src="../static/media/{{product.order_product_image}}">
+        <p class="Product_Title">{{product.order_product}}</p>
+        <p class="Product_Price">{{product.order_product_price}}</p>
+        <input id="pxl" style="display: none;" value="{{product.xl}}">
+        <p id="meho" class="meho"></p>
+        <p id="meho2" class="meho"></p>
+        
+        <div class="size_selector">
+          <p class="size_choose">Choose you size: </p>&nbsp;
+          <select class="size">
+            <option id="xxs" class="option_xxs">xxs</option>
+            <option id="xs" class="option_xs">xs</option>
+            <option id="m" class="option_m">m</option>
+            <option id="l" class="option_l">l</option>
+            
+            
+            <option id="xl" class="option_xl" >xl</option>
+            <option id="xxl" class="option_xxl" >xxl</option>
+
+          </select>
+          <p class="class_xxs" style="display:none ; " id="pxxs">{{product.xxs}}</p>
+          <p class="class_xs" style="display:none ; " id="pxs">{{product.xs}}</p>
+          <p class="class_m" style="display:none ; " id="m">{{product.m}}</p>
+          <p class="class_l" style="display:none ; " id="pl">{{product.l}}</p>
+          <p class="class_xl" style="display:none ; " id="pxl">{{product.xl}}</p>
+          <p class="class_xxl" style="display:none ; " id="pxxl">{{product.xxl}}</p>
+          <p class="merhaba" style="display: none;">{{product.xs}}</p>
+          <p id="meho"></p>
+
+        </div>
+        <div class="quantity-select">
+          <input class="quantity-choose" placeholder="Choose quantity">
+          
+            
+            <p id="meho"></p>
+
+        </div>
         <button class="product-view-button">VIEW PRODUCT</button>
         <button class="product-remove-button">REMOVE</button>
+        
       </div>
       {%endfor%}
+      <script>
+
+        const sizes_xxs=document.getElementsByClassName("class_xxs")
+        const sizes_data_xxs = [].map.call(sizes_xxs, item => item.textContent)
+        options_xxs=document.getElementsByClassName('option_xxs');
+        document.getElementById('meho').innerHTML=sizes_data_xxs
+        
+        for (i in options_xxs){
+          if(sizes_data_xxs[i]==0){
+            options_xxs[i].style.display="none"
+          }
+        }
+        const sizes_xs=document.getElementsByClassName("class_xs")
+        const sizes_data_xs = [].map.call(sizes_xs, item => item.textContent)
+        options_xs=document.getElementsByClassName('option_xs');
+        
+        
+        for (i in options_xs){
+          if(sizes_data_xs[i]==0){
+            options_xs[i].style.display="none"
+          }
+        }
+        const sizes_m=document.getElementsByClassName("class_m")
+        const sizes_data_m = [].map.call(sizes_m, item => item.textContent)
+        options_m=document.getElementsByClassName('option_m');
+        
+        
+        for (i in options_m){
+          if(sizes_data_m[i]==0){
+            options_m[i].style.display="none"
+          }
+        }
+        const sizes_l=document.getElementsByClassName("class_l")
+        const sizes_data_l = [].map.call(sizes_l, item => item.textContent)
+        options_l=document.getElementsByClassName('option_l');
+        
+        
+        for (i in options_l){
+          if(sizes_data_l[i]==0){
+            options_l[i].style.display="none"
+          }
+        }
+        const sizes_xl=document.getElementsByClassName("class_xl")
+        const sizes_data_xl = [].map.call(sizes_xl, item => item.textContent)
+        options_xl=document.getElementsByClassName('option_xl');
+        
+        
+        for (i in options_xl){
+          if(sizes_data_xl[i]==0){
+            options_xl[i].style.display="none"
+          }
+        }
+        const sizes_xxl=document.getElementsByClassName("class_xxl")
+        const sizes_data_xxl = [].map.call(sizes_xxl, item => item.textContent)
+        options_xxl=document.getElementsByClassName('option_xxl');
+        
+        
+        for (i in options_xxl){
+          if(sizes_data_xxl[i]==0){
+            options_xxl[i].style.display="none"
+          }
+        }
+        
+        
+        
+  
+        
+    </script>
       <form method="post" action="{% url 'make_order' %}">
         {% csrf_token %}
         <div class="payment">
@@ -49,7 +152,11 @@
 
     </footer-component>
   </body>
+  
+  
   <script>
+
+    
     const productCurrency=document.getElementsByClassName("Product_Price")
     const data = [].map.call(productCurrency, item => item.textContent)
     counter=0

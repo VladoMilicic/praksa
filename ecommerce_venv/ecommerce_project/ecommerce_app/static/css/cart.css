@@ -5,7 +5,8 @@
 
 }
 .product-card{
-    height: 400px;
+    height: 250px;
+    width: 900px;
     display: flex;
     justify-content: space-between;
     border: 3px;
@@ -16,8 +17,8 @@
    
 }
 .product-image{
-    width: 280px;
-    height: 350px;
+    width: 140px;
+    height: 175px;
     margin-top: 20px;
     margin-left: 20px;
 }
@@ -25,13 +26,13 @@
     font-family: 'Monsterrat';
     color: darkgray;
     font-size: 25px;
-    margin-top: 180px;
+    margin-top: 120px;
 }
 .Product_Price{
     font-family: 'Monsterrat';
     color: darkgray;
     font-size: 25px;
-    margin-top: 180px;
+    margin-top: 120px;
 }
 .product-view-button{
     width: 100px;
@@ -39,7 +40,7 @@
     background-color: black;
     color: white;
     font-family: 'Monsterrat';
-    margin-top: 180px;
+    margin-top: 100px;
 }
 .product-remove-button{
     width: 100px;
@@ -47,7 +48,8 @@
     background-color: red;
     color: white;
     font-family: 'Monsterrat';
-    margin-top: 180px;
+    margin-top: 100px;
+    margin-right: 10px;
 
 }
 .payment{
@@ -84,4 +86,57 @@
 }
 #i_total_value{
     display: none;
+}
+.select_size{
+    width: 150px;
+    height: 40px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Montserrat';
+    font-size: 15px;
+    margin-top: 120px;
+    color: black;
+}
+
+.size_selector{
+    display: flex;
+}
+.size_choose{
+    
+    font-family: 'Monsterrat';
+    font-size: 25px;
+    color: gray;
+    margin-top: 120px;
+}
+.size{
+    background-color: aqua;
+    font-family: 'Monsterrat';
+    font-size: 15px;
+    color: white;
+    width: 60px;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 115px;
+}
+#xxs{
+    display: block;
+}
+#xs{
+    display: block;
+}
+#m{
+    display: block;
+}
+#l{
+    display: block;
+}
+#xl{
+    display: block;
+}
+#xxl{
+    display: block;
+}
+.quantity-select{
+    height: 40px;
+    width: 50px;
+    margin-top: 100px;
 }

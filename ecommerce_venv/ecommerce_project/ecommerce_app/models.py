@@ -232,6 +232,12 @@ class Cart(models.Model):
     order_product = models.CharField(max_length=100)
     order_product_price = IntegerField()
     order_product_value = CharField(max_length=100)
+    xxs=CharField(max_length=100)
+    xs=CharField(max_length=100)
+    m=CharField(max_length=100)
+    l=CharField(max_length=100)
+    xl=CharField(max_length=100)
+    xxl=CharField(max_length=100)
     order_product_image = models.ImageField(
         upload_to="products/", blank=True)
 
