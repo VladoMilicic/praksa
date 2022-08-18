@@ -1,5 +1,6 @@
 
 # Create your views here.
+from audioop import reverse
 from locale import currency
 from operator import countOf
 import re
@@ -15,18 +16,19 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .models import Profile, NewUser, Product,ProductSize
+from .models import Profile, NewUser, Product, ProductSize
 from ecommerce_app.models import Cart, AllOrders, OrderValues
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 import mysql.connector
 from datetime import date, datetime, timedelta
+from taggit.models import Tag
 
 today = date.today()
 now = datetime.now()
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="1234",
+    password="root",
     database="ecommerce"
 
 
@@ -59,12 +61,14 @@ def localStores(request):
 
 
 def productView(request):
-    if request.method=="POST":
-        id=request.POST['id']
-        product=Product.objects.filter(id=id)
-        size=ProductSize.objects.filter(id=id)
 
-        return render(request, 'product-view.html',{"product":product,"size":size})
+    if request.method == "POST":
+        id = request.POST['id']
+        product = Product.objects.filter(id=id)
+        quantity = ProductSize.objects.values_list('l', flat=True).distinct()
+        tags = Tag.objects.all()
+
+        return render(request, 'product-view.html', {"product": product, "quantity": quantity, "tags": tags})
 
 
 def lookbook(request):
@@ -158,13 +162,11 @@ def edit(request):
 def mens(request):
     on_count = Product.objects.filter(status="on_count")
     off_count = Product.objects.filter(status="off_count")
-
     return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, })
 
 
 def cart(request):
     product = Cart.objects.all()
-    
     return render(request, 'cart.html', {'cart': product})
 
 
@@ -176,32 +178,26 @@ def add_to_cart(request):
         id = request.POST['id']
 
         mydata = Product.objects.filter(id=id).values()
-        size=ProductSize.objects.filter(id=id).values()
 
         values_by_id = {
             'mymembers': mydata,
         }
         b = values_by_id['mymembers'][0]
-        values_by_size = {
-            'values': size,
-        }
-        sizes = values_by_size['values'][0]
 
         order_number = 1
         num.append(order_number)
         i = len(num)
         n_order_number = i + 1
         Cart(order_number=order_number, order_product=b['product_title'], order_product_price=b[
-             'product_price'], order_product_value="$", order_product_image=b['product_image'],xxs=sizes['xxs'],xs=sizes['xs'],l=sizes['l'],xl=sizes['xl'],xxl=sizes['xxl']).save()
+             'product_price'], order_product_value="$", order_product_image=b['product_image']).save()
         AllOrders(order_number=n_order_number, order_product_id=b['id'], order_product=b['product_title'],
                   order_product_price=b['product_price'], order_product_value="$", order_product_image=b['product_image']).save()
 
         on_count = Product.objects.filter(status="on_count")
         off_count = Product.objects.filter(status="off_count")
         number_of_items = Cart.objects.all().count()
-        size=ProductSize.objects.filter(id=id)
 
-        return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, "number_of_items": number_of_items,"size":size})
+        return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, "number_of_items": number_of_items})
 
 
 def make_order(request):
@@ -236,7 +232,7 @@ def finish_order(request):
             products.append(i['order_product_id'])
         products1 = ';'.join(products)
 
-        OrderValues(order_number=order_number, price=price,name=name, card_number=card_number,
-                    expiration_date=expiration_date, security_code=security_code, date=date, time=time, products=products1).save()
+        OrderValues(order_number=order_number, Price=price, Name=name, card_number=card_number,
+                    expiration_date=expiration_date, security_code=security_code, date=date, time=time, Products=products1).save()
 
         return render(request, 'payment.html', {"products": products1})

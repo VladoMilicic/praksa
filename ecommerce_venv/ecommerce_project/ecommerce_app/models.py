@@ -13,6 +13,7 @@ from django.db.models.base import Model
 from django.db.models.fields import CharField, IntegerField
 from django import forms
 from PIL import Image
+from taggit.managers import TaggableManager
 
 
 class NewUser(models.Model):
@@ -135,6 +136,7 @@ LOWER_BODY_SIZE_HEIGHT_CHOICES = [
 class ProductSize(models.Model):
     xxs = models.PositiveIntegerField()
     xs = models.PositiveIntegerField()
+    s = models.PositiveIntegerField()
     m = models.PositiveIntegerField()
     l = models.PositiveIntegerField()
     xl = models.PositiveIntegerField()
@@ -197,6 +199,7 @@ class Product(models.Model):
         max_length=10, choices=STATUS_CHOICES, default='off_count')
     product_created = models.DateTimeField(auto_now_add=True)
     product_updated = models.DateTimeField(auto_now=True)
+    tags = TaggableManager()  # dodaje se u svaki model kome se zele dodati tagovi
     slug = models.SlugField(
         max_length=250, null=False, unique=True, db_index=True, blank=False)
 
@@ -232,12 +235,6 @@ class Cart(models.Model):
     order_product = models.CharField(max_length=100)
     order_product_price = IntegerField()
     order_product_value = CharField(max_length=100)
-    xxs=CharField(max_length=100)
-    xs=CharField(max_length=100)
-    m=CharField(max_length=100)
-    l=CharField(max_length=100)
-    xl=CharField(max_length=100)
-    xxl=CharField(max_length=100)
     order_product_image = models.ImageField(
         upload_to="products/", blank=True)
 
