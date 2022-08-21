@@ -10,8 +10,7 @@ from django.http import request, HttpResponse
 from django.http.response import HttpResponseRedirect
 import mysql.connector
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -22,6 +21,7 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 import mysql.connector
 from datetime import date, datetime, timedelta
 from taggit.models import Tag
+from django.core.paginator import Paginator
 
 today = date.today()
 now = datetime.now()
@@ -160,9 +160,32 @@ def edit(request):
 
 
 def mens(request):
+    men_products = Product.objects.filter(gender="male", status="on_count")
     on_count = Product.objects.filter(status="on_count")
     off_count = Product.objects.filter(status="off_count")
-    return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, })
+    paginator = Paginator(men_products, 12)  # Show 12 products per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, 'page_obj': page_obj, 'men_products': men_products})
+
+
+def womens(request):
+    women_products = Product.objects.filter(gender="female", status="on_count")
+    on_count = Product.objects.filter(status="on_count")
+    off_count = Product.objects.filter(status="off_count")
+    paginator = Paginator(women_products, 12)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    print(page_obj)
+    return render(request, 'womens.html', {'on_count': on_count, 'off_count': off_count, 'page_obj': page_obj, 'women_products': women_products})
+
+
+def your_lookbook(request):
+    product = Product.objects.all()[:1]
+    return render(request, 'your-lookbook.html', {'product': product})
 
 
 def cart(request):
@@ -196,8 +219,8 @@ def add_to_cart(request):
         on_count = Product.objects.filter(status="on_count")
         off_count = Product.objects.filter(status="off_count")
         number_of_items = Cart.objects.all().count()
-
-        return render(request, 'mens.html', {'on_count': on_count, 'off_count': off_count, "number_of_items": number_of_items})
+        response = redirect('mens')
+        return response
 
 
 def make_order(request):

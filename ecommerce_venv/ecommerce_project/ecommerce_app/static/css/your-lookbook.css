@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-white: #ffffff;
+    --section-separator-line: #eeeeee;
+    --active-a-link: #00c8c8;
+    --link-color-gray: #727272;
+}
+
+
+.container {
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+}
+
+.head {
+    border: 1px solid blue;
+    height: 100px;
+    width: 200px;
+}
+
+.upper-body {
+    border: 1px solid yellow;
+    height: 350px;
+    width: 200px;
+}
+
+.lower-body {
+    border: 1px solid green;
+    height: 350px;
+    width: 200px;
+}
+
+.shoes {
+    border: 1px solid black;
+    height: 100px;
+    width: 200px;
+}

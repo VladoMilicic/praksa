@@ -15,11 +15,13 @@ urlpatterns = [
     path('lookbook', views.lookbook, name="lookbook"),
     path('product-view', views.productView, name="product-view"),
     path('mens', views.mens, name="mens"),
+    path('womens', views.womens, name="womens"),
+    path('your-lookbook', views.your_lookbook, name="your-lookbook"),
     path('header', views.header, name="header"),
     path('footer', views.footer, name="footer"),
-    path('cart',views.cart,name='cart'),
-    path('add_to_cart',views.add_to_cart,name='add_to_cart'),
-    path('make_order',views.make_order,name='make_order'),
-    path('finish_order',views.finish_order,name='finish_order')
+    path('cart', views.cart, name='cart'),
+    path('add_to_cart', views.add_to_cart, name='add_to_cart'),
+    path('make_order', views.make_order, name='make_order'),
+    path('finish_order', views.finish_order, name='finish_order')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

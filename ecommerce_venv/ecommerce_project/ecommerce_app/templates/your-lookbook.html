@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your lookbook</title>
+    <link rel="stylesheet" href="{% static 'css/your-lookbook.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/heder.css' %}" />
+</head>
+
+<body>
+    {% block header %}
+    {% include 'header.html' %}
+    {% endblock %}
+    {% block content %}
+    <div class="container">
+        <div class="body">
+            <div class="head">
+                {% for prod in product %}
+                    <img src="{{prod.product_image}}" />
+                {% endfor %}
+            </div>
+            <div class="upper-body">
+
+            </div>
+            <div class="lower-body">
+
+            </div>
+            <div class="shoes">
+
+            </div>
+        </div>
+    </div>
+    {%endblock %}
+</body>
+
+</html>

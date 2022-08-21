@@ -18,7 +18,7 @@
     border-style: solid;
     border-radius: 5px;
     width: 320px;
-    height: 550px;
+    height: 600px;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
@@ -73,6 +73,9 @@
     margin: 5px;
 }
 
+.product-card:hover {
+    color: white;
+}
 
 .product-view-button {
     height: 50px;
@@ -198,6 +201,7 @@
     margin: 10px;
 }
 
+
 .paginator-button-first,
 .paginator-button-previous,
 .paginator-button-last,
@@ -209,14 +213,6 @@
     border-radius: 6px;
 }
 
-.paginator-button-first a,
-.paginator-button-previous a,
-.paginator-button-last a,
-.paginator-button-next a {
-    text-decoration: none;
-    color: wheat;
-}
-
 .paginator-button-no-more-products {
     width: 200px;
     height: 35px;
@@ -225,13 +221,21 @@
     border-radius: 6px;
     font-size: 14px;
     font-weight: bold;
+
+}
+
+.paginator-button-first a,
+.paginator-button-previous a,
+.paginator-button-last a,
+.paginator-button-next a {
+    text-decoration: none;
+    color: wheat;
 }
 
 .paginator-button-no-more-products a {
     text-decoration: none;
     color: rgb(220, 47, 47);
 }
-
 
 @media (max-width:768px) {
     .product-card {
