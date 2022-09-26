@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+<html lang="en">
+<body>
+
+    <div class="main">
+        <div class="sign-in">
+            <form method="post" action="">
+                <h2>ADMIN SIGN IN</h2>
+                {% csrf_token %}
+                {{ login_form }}
+                <div class="sign-in-button">
+                    <button type="submit" class="sign-btn">SIGN IN</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer-component></footer-component>
+</body>
+</html>
